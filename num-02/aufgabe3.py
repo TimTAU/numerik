@@ -4,10 +4,12 @@ import math
 
 def matrix_a(n):
     a = numpy.zeros((n, n))
-    numpy.fill_diagonal(a, 2)
-    for i in range(0, n - 1):
-        a[i + 1][i] = -1
-
+    for i in range(0, n):
+        a[i][i] = 2
+        if i != 0:
+            a[i - 1][i] = -1
+        if i != n - 1:
+            a[i + 1][i] = -1
     return a
 
 
@@ -34,22 +36,30 @@ def cholesky_spezial(A):
     return [vektor1, vektor2]
 
 
+def loese(vektor1, vektor2, b):
+    for i in range(0, len(vektor1)):
+        if i == 0:
+            b[i] = b[i] / vektor1[i]
+        else:
+            b[i] = (b[i] - vektor2[i - 1] * b[i - 1]) / vektor1[i]
+
+    for i in range(len(vektor1) - 1, -1, -1):
+        if i == n - 1:
+            b[i] = b[i] / vektor1[i]
+        else:
+            b[i] = (b[i] - vektor2[i] * b[i + 1]) / vektor1[i]
+
+
 def cholesky_zerlegung(A, b):
     y = numpy.linalg.solve(A, b)
     x = numpy.linalg.solve(numpy.transpose(A), y)
-
     return x
 
 
-A = matrix_a(100)
+n = 1000
+A = matrix_a(n)
+b = vektor_b(n)
+
 vektor1, vektor2 = cholesky_spezial(A)
-b = vektor_b(100)
-print(cholesky_zerlegung(A, b))
-A = matrix_a(1000)
-vektor1, vektor2 = cholesky_spezial(A)
-b = vektor_b(1000)
-print(cholesky_zerlegung(A, b))
-A = matrix_a(10000)
-vektor1, vektor2 = cholesky_spezial(A)
-b = vektor_b(10000)
-print(cholesky_zerlegung(A, b))
+loese(vektor1, vektor2, b)
+print(b)
