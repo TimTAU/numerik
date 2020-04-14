@@ -4,9 +4,9 @@ import numpy
 def zerlegung(A):
     i = 0
     p = []
-    row_lenght = len(A[0])
+    row_length = len(A[0])
     for row in A:
-        if i == row_lenght - 1:
+        if i == row_length - 1:
             p.append(i)
             break
         if row[i] == 0:
@@ -14,14 +14,14 @@ def zerlegung(A):
             p.append(i + 1)
         else:
             p.append(i)
-        for x in range(i + 1, row_lenght):
+        for x in range(i + 1, row_length):
             row_to_change = A[x]
             if row[i] == 0:
                 l = 0
             else:
                 l = int(row_to_change[i] / row[i])
             A[x][i] = l
-            for index_element in range(i + 1, row_lenght):
+            for index_element in range(i + 1, row_length):
                 A[x][index_element] -= l * row[index_element]
         i += 1
 
