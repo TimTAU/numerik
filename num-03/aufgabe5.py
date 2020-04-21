@@ -34,18 +34,18 @@ def rueckwaerts(LU, x):
     return x
 
 
-# noinspection PyPep8Naming
+# noinspection PyUnusedLocal
 def pivot(A):
     n = len(A)
 
-    L = [[0.0] * n for i in range(n)]
-    U = [[0.0] * n for i in range(n)]
-    P = [0.0 for i in range(n)]
+    L = [[0.] * n for i in range(n)]
+    U = [[0.] * n for i in range(n)]
+    P = [0. for i in range(n)]
 
     for elementI in range(0, n):
         for elementJ in range(0, n):
             U[elementI][elementJ] = A[elementI][elementJ]
-            L[elementI][elementJ] = 0.0
+            L[elementI][elementJ] = 0.
 
     for elementI in range(0, n):
         # Wenn das erste Diagonalelement 0 ist, wird die Zeile mit der nächsten mit ungleich 0 getauscht
@@ -81,7 +81,7 @@ def pivot(A):
             L[reihenElement][elementI] = multiplier
 
     for elementJ in range(n):
-        L[elementJ][elementJ] = 1.0
+        L[elementJ][elementJ] = 1.
 
     return P, L, U
 
