@@ -1,6 +1,7 @@
 import math
 
 import numpy
+from Blatt06_lib import system, plotxk
 
 
 def cg(x0, eps=1e-6):
@@ -36,4 +37,9 @@ for m in [50, 100, 200]:
 
     n = m * m
     x0 = numpy.zeros(n)
-    plotxk
+
+
+
+
+
+    plotxk(xk)
